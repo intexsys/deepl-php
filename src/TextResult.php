@@ -31,7 +31,7 @@ final class TextResult
         $this->detectedSourceLang = LanguageCode::standardizeLanguageCode($detectedSourceLang);
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         return $this->text;
     }

@@ -12,10 +12,11 @@ namespace DeepL;
  */
 class BackoffTimer
 {
-    private const BACKOFF_INITIAL = 1.0;
-    private const BACKOFF_MAX = 120.0;
-    private const BACKOFF_JITTER = 0.23;
-    private const BACKOFF_MULTIPLIER = 1.6;
+    const BACKOFF_INITIAL = 1.0;
+    const BACKOFF_MAX = 120.0;
+    const BACKOFF_JITTER = 0.23;
+    const BACKOFF_MULTIPLIER = 1.6;
+
     private $numRetries;
     private $backoff;
     private $deadline;
@@ -27,12 +28,12 @@ class BackoffTimer
         $this->deadline = microtime(true) + $this->backoff;
     }
 
-    public function getNumRetries(): int
+    public function getNumRetries()
     {
         return $this->numRetries;
     }
 
-    public function getTimeUntilDeadline(): float
+    public function getTimeUntilDeadline()
     {
         $now = microtime(true);
         return max($this->deadline - $now, 0.0);

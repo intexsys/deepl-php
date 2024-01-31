@@ -15,88 +15,88 @@ namespace DeepL;
 final class LanguageCode
 {
     /** Bulgarian language code, may be used as source or target language. */
-    public const BULGARIAN = 'bg';
+    const BULGARIAN = 'bg';
 
     /** Czech language code, may be used as source or target language. */
-    public const CZECH = 'cs';
+    const CZECH = 'cs';
 
     /** Danish language code, may be used as source or target language. */
-    public const DANISH = 'da';
+    const DANISH = 'da';
 
     /** German language code, may be used as source or target language. */
-    public const GERMAN = 'de';
+    const GERMAN = 'de';
 
     /** Greek language code, may be used as source or target language. */
-    public const GREEK = 'el';
+    const GREEK = 'el';
 
     /** English language code, may only be used as a source language. */
-    public const ENGLISH = 'en';
+    const ENGLISH = 'en';
 
     /** British English language code, may only be used as a target language. */
-    public const ENGLISH_BRITISH = 'en-GB';
+    const ENGLISH_BRITISH = 'en-GB';
 
     /** American English language code, may only be used as a target language. */
-    public const ENGLISH_AMERICAN = 'en-US';
+    const ENGLISH_AMERICAN = 'en-US';
 
     /** Spanish language code, may be used as source or target language. */
-    public const SPANISH = 'es';
+    const SPANISH = 'es';
 
     /** Estonian language code, may be used as source or target language. */
-    public const ESTONIAN = 'et';
+    const ESTONIAN = 'et';
 
     /** Finnish language code, may be used as source or target language. */
-    public const FINNISH = 'fi';
+    const FINNISH = 'fi';
 
     /** French language code, may be used as source or target language. */
-    public const FRENCH = 'fr';
+    const FRENCH = 'fr';
 
     /** Hungarian language code, may be used as source or target language. */
-    public const HUNGARIAN = 'hu';
+    const HUNGARIAN = 'hu';
 
     /** Italian language code, may be used as source or target language. */
-    public const ITALIAN = 'it';
+    const ITALIAN = 'it';
 
     /** Japanese language code, may be used as source or target language. */
-    public const JAPANESE = 'ja';
+    const JAPANESE = 'ja';
 
     /** Lithuanian language code, may be used as source or target language. */
-    public const LITHUANIAN = 'lt';
+    const LITHUANIAN = 'lt';
 
     /** Latvian language code, may be used as source or target language. */
-    public const LATVIAN = 'lv';
+    const LATVIAN = 'lv';
 
     /** Dutch language code, may be used as source or target language. */
-    public const DUTCH = 'nl';
+    const DUTCH = 'nl';
 
     /** Polish language code, may be used as source or target language. */
-    public const POLISH = 'pl';
+    const POLISH = 'pl';
 
     /** Portuguese language code, may only be used as a source language. */
-    public const PORTUGUESE = 'pt';
+    const PORTUGUESE = 'pt';
 
     /** Brazilian Portuguese language code, may only be used as a target language. */
-    public const PORTUGUESE_BRAZILIAN = 'pt-BR';
+    const PORTUGUESE_BRAZILIAN = 'pt-BR';
 
     /** European Portuguese language code, may only be used as a target language. */
-    public const PORTUGUESE_EUROPEAN = 'pt-PT';
+    const PORTUGUESE_EUROPEAN = 'pt-PT';
 
     /** Romanian language code, may be used as source or target language. */
-    public const ROMANIAN = 'ro';
+    const ROMANIAN = 'ro';
 
     /** Russian language code, may be used as source or target language. */
-    public const RUSSIAN = 'ru';
+    const RUSSIAN = 'ru';
 
     /** Slovak language code, may be used as source or target language. */
-    public const SLOVAK = 'sk';
+    const SLOVAK = 'sk';
 
     /** Slovenian language code, may be used as source or target language. */
-    public const SLOVENIAN = 'sl';
+    const SLOVENIAN = 'sl';
 
     /** Swedish language code, may be used as source or target language. */
-    public const SWEDISH = 'sv';
+    const SWEDISH = 'sv';
 
     /** Chinese language code, may be used as source or target language. */
-    public const CHINESE = 'zh';
+    const CHINESE = 'zh';
 
     /**
      * Changes the upper- and lower-casing of the given language code to match ISO 639-1 with an optional regional code
@@ -105,7 +105,7 @@ final class LanguageCode
      * @return string String containing the standardized language code.
      * @throws DeepLException If language code is an empty string.
      */
-    public static function standardizeLanguageCode(string $langCode): string
+    public static function standardizeLanguageCode(string $langCode)
     {
         if (strlen($langCode) === 0) {
             throw new DeepLException('langCode must be a non-empty string');

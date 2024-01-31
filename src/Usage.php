@@ -34,14 +34,14 @@ final class Usage
     /**
      * @return bool True if any usage type limit has been reached or passed, otherwise false.
      */
-    public function anyLimitReached(): bool
+    public function anyLimitReached()
     {
         return ($this->character !== null && $this->character->limitReached()) ||
             ($this->document !== null && $this->document->limitReached()) ||
             ($this->teamDocument !== null && $this->teamDocument->limitReached());
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         $list = [
             'Characters' => $this->character,
@@ -66,7 +66,7 @@ final class Usage
         $this->teamDocument = $this->buildUsageDetail('team_document', $json);
     }
 
-    private function buildUsageDetail(string $prefix, array $json): ?UsageDetail
+    private function buildUsageDetail(string $prefix, array $json)
     {
         $count = "{$prefix}_count";
         $limit = "{$prefix}_limit";

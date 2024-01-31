@@ -23,17 +23,17 @@ class HttpClient
      */
     private $curlHandle;
 
-    public const OPTION_FILE = 'file';
-    public const OPTION_HEADERS = 'headers';
-    public const OPTION_PARAMS = 'params';
-    public const OPTION_OUTFILE = 'outfile';
+    const OPTION_FILE = 'file';
+    const OPTION_HEADERS = 'headers';
+    const OPTION_PARAMS = 'params';
+    const OPTION_OUTFILE = 'outfile';
 
     public function __construct(
-        string           $serverUrl,
-        array            $headers,
-        float            $timeout,
-        int              $maxRetries,
-        ?LoggerInterface $logger
+        string $serverUrl,
+        array  $headers,
+        float  $timeout,
+        int    $maxRetries,
+        $logger
     ) {
         $this->serverUrl = $serverUrl;
         $this->maxRetries = $maxRetries;
@@ -56,7 +56,7 @@ class HttpClient
      * @return array Status code and content.
      * @throws DeepLException
      */
-    public function sendRequestWithBackoff(string $method, string $url, ?array $options = []): array
+    public function sendRequestWithBackoff(string $method, string $url, array $options = [])
     {
         $url = $this->serverUrl . $url;
         $headers = array_replace(
@@ -125,9 +125,9 @@ class HttpClient
         float $timeout,
         array $headers,
         array $params,
-        ?string $filePath,
+        $filePath,
         $outFile
-    ): array {
+    ) {
         $curlOptions = [];
         $curlOptions[\CURLOPT_HEADER] = false;
 
@@ -148,7 +148,7 @@ class HttpClient
         $curlOptions[\CURLOPT_TIMEOUT] = $timeout;
 
         // Convert headers from an associative array to an array of "key: value" elements
-        $curlOptions[\CURLOPT_HTTPHEADER] = \array_map(function (string $key, string $value): string {
+        $curlOptions[\CURLOPT_HTTPHEADER] = \array_map(function (string $key, string $value) {
             return "$key: $value";
         }, array_keys($headers), array_values($headers));
 
@@ -194,7 +194,7 @@ class HttpClient
         }
     }
 
-    private function shouldRetry(?array $response, ?ConnectionException $exception): bool
+    private function shouldRetry(array $response, $exception)
     {
         if ($exception !== null) {
             return $exception->shouldRetry;
@@ -205,23 +205,22 @@ class HttpClient
         return $statusCode === 429 || ($statusCode >= 500 && $statusCode !== 503);
     }
 
-    private function logDebug(string $message): void
+    private function logDebug(string $message)
     {
         if ($this->logger) {
             $this->logger->debug($message);
         }
     }
 
-    private function logInfo(string $message): void
+    private function logInfo(string $message)
     {
         if ($this->logger) {
             $this->logger->info($message);
         }
     }
 
-    private static function urlEncodeWithRepeatedParams(?array $params): string
+    private static function urlEncodeWithRepeatedParams(array $params)
     {
-        $params = $params ?? [];
         $fields = [];
         foreach ($params as $key => $value) {
             $name = \urlencode($key);
@@ -229,7 +228,7 @@ class HttpClient
                 $fields[] = implode(
                     '&',
                     array_map(
-                        function (string $textElement) use ($name): string {
+                        function (string $textElement) use ($name) {
                             return $name . '=' . \urlencode($textElement);
                         },
                         $value

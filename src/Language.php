@@ -36,7 +36,7 @@ final class Language
         $this->supportsFormality = $supportsFormality;
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         return "$this->name ($this->code)";
     }

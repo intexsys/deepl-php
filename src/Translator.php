@@ -15,7 +15,7 @@ final class Translator
     /**
      * Library version.
      */
-    public const VERSION = '0.1.0';
+    const VERSION = '0.1.0';
 
     /**
      * Implements all HTTP requests and retries.
@@ -66,7 +66,7 @@ final class Translator
      * @return Usage
      * @throws DeepLException
      */
-    public function getUsage(): Usage
+    public function getUsage()
     {
         $response = $this->client->sendRequestWithBackoff('POST', '/v2/usage');
         $this->checkStatusCode($response);
@@ -79,7 +79,7 @@ final class Translator
      * @return Language[] Array of Language objects containing available source languages.
      * @throws DeepLException
      */
-    public function getSourceLanguages(): array
+    public function getSourceLanguages()
     {
         return $this->getLanguages(false);
     }
@@ -89,7 +89,7 @@ final class Translator
      * @return Language[] Array of Language objects containing available target languages.
      * @throws DeepLException
      */
-    public function getTargetLanguages(): array
+    public function getTargetLanguages()
     {
         return $this->getLanguages(true);
     }
@@ -104,7 +104,7 @@ final class Translator
      * @throws DeepLException
      * @see \DeepL\TranslateTextOptions
      */
-    public function translateText($texts, ?string $sourceLang, string $targetLang, array $options = [])
+    public function translateText($texts, string $sourceLang, string $targetLang, array $options = [])
     {
         $params = $this->buildBodyParams(
             $sourceLang,
@@ -139,7 +139,7 @@ final class Translator
      * @return Language[] Array of Language objects containing available languages.
      * @throws DeepLException
      */
-    private function getLanguages(bool $target): array
+    private function getLanguages(bool $target)
     {
         $response = $this->client->sendRequestWithBackoff(
             'GET',
@@ -166,7 +166,7 @@ final class Translator
      * @param string[]|string $tagList List of tags to join.
      * @return string Tags combined into a comma-delimited string.
      */
-    private function joinTagList($tagList): string
+    private function joinTagList($tagList)
     {
         if (is_string($tagList)) {
             return $tagList;
@@ -184,12 +184,8 @@ final class Translator
      * @return array Associative array of HTTP parameters.
      * @throws DeepLException
      */
-    private function buildBodyParams(
-        ?string $sourceLang,
-        string $targetLang,
-        ?string $formality,
-        ?string $glossary
-    ): array {
+    private function buildBodyParams($sourceLang, string $targetLang, $formality, $glossary)
+    {
         $targetLang = LanguageCode::standardizeLanguageCode($targetLang);
         if (isset($sourceLang)) {
             $sourceLang = LanguageCode::standardizeLanguageCode($sourceLang);
@@ -229,14 +225,14 @@ final class Translator
             foreach ($texts as $text) {
                 if (!is_string($text) || strlen($text) === 0) {
                     throw new DeepLException(
-                        'texts parameter must be a non-empty string or array of non-empty strings',
+                        'texts parameter must be a non-empty string or array of non-empty strings'
                     );
                 }
             }
         } else {
             if (!is_string($texts) || strlen($texts) === 0) {
                 throw new DeepLException(
-                    'texts parameter must be a non-empty string or array of non-empty strings',
+                    'texts parameter must be a non-empty string or array of non-empty strings'
                 );
             }
         }
@@ -250,7 +246,7 @@ final class Translator
      * Note the formality and glossary options are handled separately, because these options overlap with document
      * translation.
      */
-    private function validateAndAppendTextOptions(array &$params, ?array $options): void
+    private function validateAndAppendTextOptions(array &$params, array $options)
     {
         if ($options === null) {
             return;
@@ -348,7 +344,7 @@ final class Translator
      * @param string authKey The authentication key to check.
      * @return bool True if the key is associated with a free account, otherwise false.
      */
-    public static function isAuthKeyFreeAccount(string $authKey): bool
+    public static function isAuthKeyFreeAccount(string $authKey)
     {
         return substr($authKey, -3) === ':fx';
     }

@@ -30,7 +30,7 @@ final class UsageDetail
     /**
      * @return bool True if the amount used has already reached or passed the allowable amount, otherwise false.
      */
-    public function limitReached(): bool
+    public function limitReached()
     {
         return $this->count >= $this->limit;
     }
