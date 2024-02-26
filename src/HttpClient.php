@@ -28,18 +28,13 @@ class HttpClient
     const OPTION_PARAMS = 'params';
     const OPTION_OUTFILE = 'outfile';
 
-    public function __construct(
-        string $serverUrl,
-        array  $headers,
-        float  $timeout,
-        int    $maxRetries,
-        $logger
-    ) {
-        $this->serverUrl = $serverUrl;
+    public function __construct(string $serverUrl, array $headers, float $timeout, int $maxRetries, $logger)
+    {
+        $this->serverUrl  = $serverUrl;
         $this->maxRetries = $maxRetries;
         $this->minTimeout = $timeout;
-        $this->headers = $headers;
-        $this->logger = $logger;
+        $this->headers    = $headers;
+        $this->logger     = $logger;
         $this->curlHandle = \curl_init();
     }
 
@@ -56,7 +51,7 @@ class HttpClient
      * @return array Status code and content.
      * @throws DeepLException
      */
-    public function sendRequestWithBackoff(string $method, string $url, array $options = [])
+    public function sendRequestWithBackoff(string $method, string $url, $options = [])
     {
         $url = $this->serverUrl . $url;
         $headers = array_replace(
@@ -127,7 +122,7 @@ class HttpClient
         array $params,
         $filePath,
         $outFile
-    ) {
+    ): array {
         $curlOptions = [];
         $curlOptions[\CURLOPT_HEADER] = false;
 
@@ -194,11 +189,12 @@ class HttpClient
         }
     }
 
-    private function shouldRetry(array $response, $exception)
+    private function shouldRetry(array $response, $exception): bool
     {
         if ($exception !== null) {
             return $exception->shouldRetry;
         }
+
         list($statusCode, ) = $response;
 
         // Retry on Too-Many-Requests error and internal errors except Service-Unavailable errors
@@ -219,7 +215,7 @@ class HttpClient
         }
     }
 
-    private static function urlEncodeWithRepeatedParams(array $params)
+    private static function urlEncodeWithRepeatedParams(array $params): string
     {
         $fields = [];
         foreach ($params as $key => $value) {
@@ -228,7 +224,7 @@ class HttpClient
                 $fields[] = implode(
                     '&',
                     array_map(
-                        function (string $textElement) use ($name) {
+                        function (string $textElement) use ($name): string {
                             return $name . '=' . \urlencode($textElement);
                         },
                         $value

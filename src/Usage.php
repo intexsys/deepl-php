@@ -34,14 +34,14 @@ final class Usage
     /**
      * @return bool True if any usage type limit has been reached or passed, otherwise false.
      */
-    public function anyLimitReached()
+    public function anyLimitReached(): bool
     {
         return ($this->character !== null && $this->character->limitReached()) ||
             ($this->document !== null && $this->document->limitReached()) ||
             ($this->teamDocument !== null && $this->teamDocument->limitReached());
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         $list = [
             'Characters' => $this->character,

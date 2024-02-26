@@ -66,7 +66,7 @@ final class Translator
      * @return Usage
      * @throws DeepLException
      */
-    public function getUsage()
+    public function getUsage(): Usage
     {
         $response = $this->client->sendRequestWithBackoff('POST', '/v2/usage');
         $this->checkStatusCode($response);
@@ -79,7 +79,7 @@ final class Translator
      * @return Language[] Array of Language objects containing available source languages.
      * @throws DeepLException
      */
-    public function getSourceLanguages()
+    public function getSourceLanguages(): array
     {
         return $this->getLanguages(false);
     }
@@ -89,7 +89,7 @@ final class Translator
      * @return Language[] Array of Language objects containing available target languages.
      * @throws DeepLException
      */
-    public function getTargetLanguages()
+    public function getTargetLanguages(): array
     {
         return $this->getLanguages(true);
     }
@@ -246,7 +246,7 @@ final class Translator
      * Note the formality and glossary options are handled separately, because these options overlap with document
      * translation.
      */
-    private function validateAndAppendTextOptions(array &$params, array $options)
+    private function validateAndAppendTextOptions(array &$params, $options)
     {
         if ($options === null) {
             return;
@@ -344,7 +344,7 @@ final class Translator
      * @param string authKey The authentication key to check.
      * @return bool True if the key is associated with a free account, otherwise false.
      */
-    public static function isAuthKeyFreeAccount(string $authKey)
+    public static function isAuthKeyFreeAccount(string $authKey): bool
     {
         return substr($authKey, -3) === ':fx';
     }

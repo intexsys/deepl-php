@@ -22,7 +22,7 @@ interface LoggerInterface
      * @param array $context
      * @return void
      */
-    public function info(string $message, array $context = array());
+    public function info(string $message, array $context = []);
 
     /**
      * Detailed debug information.
@@ -31,5 +31,5 @@ interface LoggerInterface
      * @param array $context
      * @return void
      */
-    public function debug(string $message, array $context = array());
+    public function debug(string $message, array $context = []);
 }

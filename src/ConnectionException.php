@@ -20,6 +20,7 @@ class ConnectionException extends DeepLException
     public function __construct(string $message, int $code, $previous, bool $shouldRetry)
     {
         parent::__construct($message, $code, $previous);
+
         $this->shouldRetry = $shouldRetry;
     }
 }

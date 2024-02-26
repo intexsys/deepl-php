@@ -29,14 +29,14 @@ final class Language
      */
     public $supportsFormality;
 
-    public function __construct(string $name, string $code, ?bool $supportsFormality)
+    public function __construct(string $name, string $code, $supportsFormality)
     {
-        $this->name = $name;
-        $this->code = $code;
+        $this->name              = $name;
+        $this->code              = $code;
         $this->supportsFormality = $supportsFormality;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return "$this->name ($this->code)";
     }

@@ -27,11 +27,11 @@ final class TextResult
      */
     public function __construct(string $text, string $detectedSourceLang)
     {
-        $this->text = $text;
+        $this->text               = $text;
         $this->detectedSourceLang = LanguageCode::standardizeLanguageCode($detectedSourceLang);
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->text;
     }

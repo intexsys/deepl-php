@@ -105,7 +105,7 @@ final class LanguageCode
      * @return string String containing the standardized language code.
      * @throws DeepLException If language code is an empty string.
      */
-    public static function standardizeLanguageCode(string $langCode)
+    public static function standardizeLanguageCode(string $langCode): string
     {
         if (strlen($langCode) === 0) {
             throw new DeepLException('langCode must be a non-empty string');
