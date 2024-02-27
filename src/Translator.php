@@ -104,7 +104,7 @@ final class Translator
      * @throws DeepLException
      * @see \DeepL\TranslateTextOptions
      */
-    public function translateText($texts, string $sourceLang, string $targetLang, array $options = [])
+    public function translateText($texts, $sourceLang, string $targetLang, array $options = [])
     {
         $params = $this->buildBodyParams(
             $sourceLang,
@@ -139,7 +139,7 @@ final class Translator
      * @return Language[] Array of Language objects containing available languages.
      * @throws DeepLException
      */
-    private function getLanguages(bool $target)
+    private function getLanguages(bool $target): array
     {
         $response = $this->client->sendRequestWithBackoff(
             'GET',
@@ -166,7 +166,7 @@ final class Translator
      * @param string[]|string $tagList List of tags to join.
      * @return string Tags combined into a comma-delimited string.
      */
-    private function joinTagList($tagList)
+    private function joinTagList($tagList): string
     {
         if (is_string($tagList)) {
             return $tagList;
@@ -184,7 +184,7 @@ final class Translator
      * @return array Associative array of HTTP parameters.
      * @throws DeepLException
      */
-    private function buildBodyParams($sourceLang, string $targetLang, $formality, $glossary)
+    private function buildBodyParams($sourceLang, string $targetLang, $formality, $glossary): array
     {
         $targetLang = LanguageCode::standardizeLanguageCode($targetLang);
         if (isset($sourceLang)) {

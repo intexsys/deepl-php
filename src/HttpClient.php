@@ -143,7 +143,7 @@ class HttpClient
         $curlOptions[\CURLOPT_TIMEOUT] = $timeout;
 
         // Convert headers from an associative array to an array of "key: value" elements
-        $curlOptions[\CURLOPT_HTTPHEADER] = \array_map(function (string $key, string $value) {
+        $curlOptions[\CURLOPT_HTTPHEADER] = \array_map(function (string $key, string $value): string {
             return "$key: $value";
         }, array_keys($headers), array_values($headers));
 
@@ -189,7 +189,7 @@ class HttpClient
         }
     }
 
-    private function shouldRetry(array $response, $exception): bool
+    private function shouldRetry($response, $exception): bool
     {
         if ($exception !== null) {
             return $exception->shouldRetry;
@@ -215,8 +215,9 @@ class HttpClient
         }
     }
 
-    private static function urlEncodeWithRepeatedParams(array $params): string
+    private static function urlEncodeWithRepeatedParams($params): string
     {
+        $params = $params ?? [];
         $fields = [];
         foreach ($params as $key => $value) {
             $name = \urlencode($key);
